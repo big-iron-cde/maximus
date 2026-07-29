@@ -1,0 +1,29 @@
+[project]
+name = "maximus"
+version = "0.1.0"
+description = "A CLI tool built with uv"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pyyaml>=6.0",
+    "jsonquerylang>=1.0",
+]
+
+[project.scripts]
+maximus = "maximus.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/maximus"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
