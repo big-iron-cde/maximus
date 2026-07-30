@@ -39,13 +39,25 @@ Prints a human-readable summary of every bus cycle.
 
 ### Query a capture (legacy filter mode)
 
+Filter cycles by any combination of criteria. Each matching cycle prints on its own line.
+
 ```bash
 # Show only writes to address 0200
 uv run maximus query capture.jsonl --addr 0200 --rw 1
 
-# Show all reads
-uv run maximus query capture.jsonl --rw 0
+# Show writes of value 32 (hex 20) to 0200
+uv run maximus query capture.jsonl --addr 0200 --data 20 --rw 1
+
+# Show all reads in sequence range 10-20
+uv run maximus query capture.jsonl --rw 0 --min-seq 10 --max-seq 20
 ```
+
+Output format:
+```
+seq=26  addr=0200  data=20  rw=W
+```
+
+**Note:** `query` always exits `0` even when nothing matches (empty output = no cycles matched the filters). For pass/fail verification, use `check` or `jsonquery` instead.
 
 ### JSON Query
 
